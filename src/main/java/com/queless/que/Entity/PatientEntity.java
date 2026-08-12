@@ -1,5 +1,7 @@
 package com.queless.que.Entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +25,14 @@ public class PatientEntity {
 
     private String phone;
 
-    private String status;
+    private Integer tokenNumber;
+
+    @Enumerated(EnumType.STRING)
+    private PatientStatus status;
+
+    private LocalDateTime checkInTime;
+
+    private LocalDateTime completedTime;
 
     @ManyToOne
     @JoinColumn(name = "queue_id")

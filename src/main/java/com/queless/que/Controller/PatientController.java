@@ -21,12 +21,19 @@ public class PatientController {
         return "Patient API is working";
     }
 
-    // Save Patient in Queue
+    // Save Patient
     @PostMapping("/queue/{queueId}")
     public PatientEntity savePatient(@PathVariable Integer queueId,
                                      @RequestBody PatientEntity patient) {
 
         return service.savePatient(queueId, patient);
+    }
+
+    // Call Next Patient
+    @PutMapping("/queue/{queueId}/call-next")
+    public PatientEntity callNextPatient(@PathVariable Integer queueId) {
+
+        return service.callNextPatient(queueId);
     }
 
     // Get All Patients
@@ -35,7 +42,7 @@ public class PatientController {
         return service.getAllPatients();
     }
 
-    // Get Patient By ID
+    // Get Patient By Id
     @GetMapping("/getById/{id}")
     public PatientEntity getPatientById(@PathVariable Integer id) {
         return service.getPatientById(id);
@@ -53,4 +60,5 @@ public class PatientController {
         service.deletePatient(id);
         return "Patient Deleted Successfully";
     }
+
 }
