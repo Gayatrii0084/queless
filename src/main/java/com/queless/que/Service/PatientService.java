@@ -49,7 +49,6 @@ public class PatientService {
     }
 
     // Call Next Patient
- // Call Next Patient
     public PatientEntity callNextPatient(Integer queueId) {
 
         // Check if someone is already in consultation
@@ -78,26 +77,8 @@ public class PatientService {
 
         return repository.save(patient);
     }
-    // Get All Patients
-    public List<PatientEntity> getAllPatients() {
-        return repository.findAll();
-    }
 
-    // Get Patient By Id
-    public PatientEntity getPatientById(Integer id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    // Update Patient
-    public PatientEntity updatePatient(PatientEntity patient) {
-        return repository.save(patient);
-    }
-
-    // Delete Patient
-    public void deletePatient(Integer id) {
-        repository.deleteById(id);
-    }
- // Complete Consultation
+    // Complete Consultation
     public PatientEntity completeConsultation(Integer patientId) {
 
         Optional<PatientEntity> optionalPatient =
@@ -118,6 +99,26 @@ public class PatientService {
         patient.setCompletedTime(LocalDateTime.now());
 
         return repository.save(patient);
+    }
+
+    // Get All Patients
+    public List<PatientEntity> getAllPatients() {
+        return repository.findAll();
+    }
+
+    // Get Patient By Id
+    public PatientEntity getPatientById(Integer id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    // Update Patient
+    public PatientEntity updatePatient(PatientEntity patient) {
+        return repository.save(patient);
+    }
+
+    // Delete Patient
+    public void deletePatient(Integer id) {
+        repository.deleteById(id);
     }
 
 }

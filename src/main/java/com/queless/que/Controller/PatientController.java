@@ -35,6 +35,12 @@ public class PatientController {
 
         return service.callNextPatient(queueId);
     }
+ // Complete Consultation
+    @PutMapping("/complete/{patientId}")
+    public PatientEntity completeConsultation(@PathVariable Integer patientId) {
+
+        return service.completeConsultation(patientId);
+    }
 
     // Get All Patients
     @GetMapping("/getAll")
