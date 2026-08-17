@@ -120,7 +120,55 @@ public class PatientService {
 
         return repository.save(patient);
     }
+ // Get Current Patient
+    public PatientEntity getCurrentPatient(Integer queueId) {
 
+        Optional<PatientEntity> patient =
+                repository.findByQueueIdAndStatus(
+                        queueId,
+                        PatientStatus.IN_CONSULTATION);
+
+        return patient.orElse(null);
+    }
+ // Get Next Waiting Patient
+    public PatientEntity getNextWaitingPatient(Integer queueId) {
+
+        Optional<PatientEntity> patient =
+                repository.findFirstByQueueIdAndStatusOrderByTokenNumberAsc(
+                        queueId,
+                        PatientStatus.WAITING);
+
+        return patient.orElse(null);
+    }
+ // Get Waiting Patient Count
+    public long getWaitingPatientCount(Integer queueId) {
+
+        return repository.countByQueueIdAndStatus(
+                queueId,
+                PatientStatus.WAITING);
+    }
+
+    // Get Completed Patient Count
+    public long getCompletedPatientCount(Integer queueId) {
+
+        return repository.countByQueueIdAndStatus(
+                queueId,
+                PatientStatus.COMPLETED);
+    }
+
+    // Get Skipped Patient Count
+    public long getSkippedPatientCount(Integer queueId) {
+
+        return repository.countByQueueIdAndStatus(
+                queueId,
+                PatientStatus.SKIPPED);
+    }
+
+    // Get Total Patient Count
+    public long getTotalPatientCount(Integer queueId) {
+
+        return repository.countByQueueId(queueId);
+    }
     // Get All Patients
     public List<PatientEntity> getAllPatients() {
         return repository.findAll();

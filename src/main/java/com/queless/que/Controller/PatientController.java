@@ -35,6 +35,45 @@ public class PatientController {
 
         return service.callNextPatient(queueId);
     }
+ // Get Current Patient
+    @GetMapping("/queue/{queueId}/current")
+    public PatientEntity getCurrentPatient(@PathVariable Integer queueId) {
+
+        return service.getCurrentPatient(queueId);
+    }
+ // Get Next Waiting Patient
+    @GetMapping("/queue/{queueId}/next")
+    public PatientEntity getNextWaitingPatient(@PathVariable Integer queueId) {
+
+        return service.getNextWaitingPatient(queueId);
+    }
+ // Get Waiting Patient Count
+    @GetMapping("/queue/{queueId}/waiting-count")
+    public long getWaitingPatientCount(@PathVariable Integer queueId) {
+
+        return service.getWaitingPatientCount(queueId);
+    }
+
+    // Get Completed Patient Count
+    @GetMapping("/queue/{queueId}/completed-count")
+    public long getCompletedPatientCount(@PathVariable Integer queueId) {
+
+        return service.getCompletedPatientCount(queueId);
+    }
+
+    // Get Skipped Patient Count
+    @GetMapping("/queue/{queueId}/skipped-count")
+    public long getSkippedPatientCount(@PathVariable Integer queueId) {
+
+        return service.getSkippedPatientCount(queueId);
+    }
+
+    // Get Total Patient Count
+    @GetMapping("/queue/{queueId}/total-count")
+    public long getTotalPatientCount(@PathVariable Integer queueId) {
+
+        return service.getTotalPatientCount(queueId);
+    }
  // Complete Consultation
     @PutMapping("/complete/{patientId}")
     public PatientEntity completeConsultation(@PathVariable Integer patientId) {

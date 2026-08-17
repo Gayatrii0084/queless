@@ -11,15 +11,20 @@ import com.queless.que.Entity.PatientStatus;
 
 public interface PatientRepository extends JpaRepository<PatientEntity, Integer> {
 
-    // Find maximum token number in a queue
     @Query("SELECT MAX(p.tokenNumber) FROM PatientEntity p WHERE p.queue.id = :queueId")
     Integer findMaxTokenNumberByQueueId(@Param("queueId") Integer queueId);
 
-    // Find first waiting patient
+    Optional<PatientEntity> findByQueueIdAndStatus(
+            Integer queueId,
+            PatientStatus status);
+
     Optional<PatientEntity> findFirstByQueueIdAndStatusOrderByTokenNumberAsc(
             Integer queueId,
             PatientStatus status);
 
-	Optional<PatientEntity> findByQueueIdAndStatus(Integer queueId, PatientStatus inConsultation);
+    long countByQueueIdAndStatus(
+            Integer queueId,
+            PatientStatus status);
 
+    long countByQueueId(Integer queueId);
 }
