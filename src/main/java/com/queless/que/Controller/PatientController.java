@@ -41,7 +41,12 @@ public class PatientController {
 
         return service.completeConsultation(patientId);
     }
+ // Skip Patient
+    @PutMapping("/skip/{patientId}")
+    public PatientEntity skipPatient(@PathVariable Integer patientId) {
 
+        return service.skipPatient(patientId);
+    }
     // Get All Patients
     @GetMapping("/getAll")
     public List<PatientEntity> getAllPatients() {

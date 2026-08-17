@@ -100,6 +100,26 @@ public class PatientService {
 
         return repository.save(patient);
     }
+ // Skip Patient
+    public PatientEntity skipPatient(Integer patientId) {
+
+        Optional<PatientEntity> optionalPatient =
+                repository.findById(patientId);
+
+        if (optionalPatient.isEmpty()) {
+            return null;
+        }
+
+        PatientEntity patient = optionalPatient.get();
+
+        if (patient.getStatus() != PatientStatus.IN_CONSULTATION) {
+            return null;
+        }
+
+        patient.setStatus(PatientStatus.SKIPPED);
+
+        return repository.save(patient);
+    }
 
     // Get All Patients
     public List<PatientEntity> getAllPatients() {
